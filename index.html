@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Valentine for Akashleena 💕</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fce7f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 5px;
+      transition: transform 0.3s;
+    }
+
+    .yes {
+      background: #c4b5fd;
+    }
+
+    .no {
+      background: red;
+      color: white;
+    }
+
+    #final {
+      display: none;
+    }
+
+    #confetti {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      font-size: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<audio id="bg-music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div id="confetti"></div>
+
+<div class="card" id="question">
+  <h2>Will you be my Valentine, Akashleena Ghosh? 💘</h2>
+
+  <div class="buttons">
+    <button id="yesBtn" class="yes">Yes</button>
+    <button id="noBtn" class="no">No</button>
+  </div>
+</div>
+
+<div class="card" id="final">
+  <h2>Yayy! I knew you'd say yes bebtu gebtu! 💕</h2>
+  <p>Happy Valentine’s Day, my love 💖</p>
+  <img src="couple.jpg" width="250" style="border-radius:15px; margin-top:10px;">
+</div>
+
+<script>
+let noClicks = 0;
+const noTexts = [
+  "No",
+  "Are you serious?",
+  "Do you not love me?",
+  "Sacchi mucchi?",
+  "Last chance..."
+];
+
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const question = document.getElementById("question");
+const final = document.getElementById("final");
+const confetti = document.getElementById("confetti");
+const music = document.getElementById("bg-music");
+
+noBtn.onclick = function() {
+  noClicks++;
+  music.play();
+
+  if (noClicks < noTexts.length) {
+    noBtn.innerText = noTexts[noClicks];
+    yesBtn.style.transform = `scale(${1 + noClicks * 0.4})`;
+  } else {
+    noBtn.style.display = "none";
+    yesBtn.innerText = "Yes dear, I love you with all my heart 💜";
+    yesBtn.style.transform = "scale(2)";
+  }
+};
+
+yesBtn.onclick = function() {
+  question.style.display = "none";
+  final.style.display = "block";
+
+  confetti.style.display = "block";
+
+  let hearts = "";
+  for (let i = 0; i < 100; i++) {
+    hearts += "💖🎉";
+  }
+  confetti.innerHTML = hearts;
+};
+</script>
+
+</body>
+</html>
