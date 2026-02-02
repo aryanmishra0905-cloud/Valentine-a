@@ -49,16 +49,33 @@
       display: none;
     }
 
-    #confetti {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      font-size: 30px;
-    }
+   #confetti {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  font-size: 28px;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
   </style>
 </head>
 <body>
@@ -120,12 +137,22 @@ yesBtn.onclick = function() {
   final.style.display = "block";
 
   confetti.style.display = "block";
+confetti.innerHTML = "";
 
-  let hearts = "";
-  for (let i = 0; i < 100; i++) {
-    hearts += "💖🎉";
-  }
-  confetti.innerHTML = hearts;
+for (let i = 0; i < 60; i++) {
+  const piece = document.createElement("div");
+  piece.classList.add("confetti-piece");
+
+  piece.innerText = i % 2 === 0 ? "💖" : "🎉";
+
+  piece.style.left = Math.random() * 100 + "%";
+  piece.style.top = "-10%";
+  piece.style.animationDuration = (2 + Math.random() * 3) + "s";
+  piece.style.animationDelay = Math.random() * 2 + "s";
+
+  confetti.appendChild(piece);
+}
+
 };
 </script>
 
