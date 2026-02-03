@@ -84,6 +84,12 @@
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
+<button id="musicBtn"
+ style="position:fixed; top:10px; right:10px; padding:8px 12px; border:none;
+ background:#c4b5fd; border-radius:10px; cursor:pointer;">
+  🎵 Play Music
+</button>
+
 <div id="confetti"></div>
 
 <div class="card" id="question">
@@ -102,6 +108,13 @@
 </div>
 
 <script>
+const musicBtn = document.getElementById("musicBtn");
+
+musicBtn.onclick = function() {
+  music.play();
+  musicBtn.style.display = "none"; // hides the button after clicking
+};
+
 let noClicks = 0;
 const noTexts = [
   "No",
@@ -120,7 +133,6 @@ const music = document.getElementById("bg-music");
 
 noBtn.onclick = function() {
   noClicks++;
-  music.play();
 
   if (noClicks < noTexts.length) {
     noBtn.innerText = noTexts[noClicks];
